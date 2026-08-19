@@ -1,0 +1,452 @@
+<!doctype html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-lang-key="title-1"></title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+
+  <style>
+    .bottom-layer {
+      position: fixed;
+      width: 100%;
+      height: 15vw;
+      bottom: -2vw;
+      overflow: visible;
+      z-index: 99999;
+    }
+
+    .wave-1 {
+      position: absolute;
+      width: 100vw;
+      top: -2vw;
+
+      left: -22vw;
+      animation: waveMoveLeftRight 2s ease-in-out infinite alternate;
+    }
+
+    .wave-2 {
+      position: absolute;
+      width: 100%;
+      right: 25vw;
+      animation: waveMoveRightLeft 2s ease-in-out infinite alternate;
+    }
+
+    .wave-1 img,
+    .wave-2 img {
+      width: 150vw;
+      object-fit: cover;
+      display: block;
+    }
+
+    @keyframes waveMoveLeftRight {
+      from {
+        transform: translateX(0) translateY(0);
+      }
+
+      to {
+        transform: translateX(-4vw) translateY(-0.8vw);
+      }
+    }
+
+    @keyframes waveMoveRightLeft {
+      from {
+        transform: translateX(0) translateY(-0.8vw);
+      }
+
+      to {
+        transform: translateX(4vw) translateY(0);
+      }
+    }
+
+    .page-title {
+      position: absolute;
+      bottom: 8%!important;
+      left: 50%;
+
+      width: 40vw;
+      height: 40vw;
+      border-radius: 50%;
+      border: 0.8vw solid white;
+      text-align: center;
+      transition: opacity 3s ease;
+      transform: translateX(-50%);
+      background: linear-gradient(150deg, #ffc15e 10%, #ff7433 100%);
+      box-shadow: inset 0.2vw 0.3vw 0.5vw rgba(3, 3, 3, 0.566);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .page-title span {
+      width: 80%;
+      margin-bottom: 10vw;
+      font-size: 5.5vw;
+      text-align: center;
+      color: white;
+      font-family: "MeriendaOne";
+      display: block;
+      font-weight: bolder !important;
+      text-shadow: -0.2vw 0.2vw 0.3vw rgba(0, 0, 0, 0.737);
+    }
+
+    .title {
+      position: absolute;
+      top: 2%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 28vw;
+      height: 4vw;
+      font-size: 2.2vw;
+      color: #4065bd;
+      border: 0.2vw solid white;
+      background-color: #f2f6ff;
+      border-radius: 3vw;
+      text-shadow: -0.1vw 0.2vw 0.1vw #4066bd50;
+      text-align: center;
+      display: none;
+      justify-content: center;
+      font-family: "MeriendaOne";
+      padding: 0.2vw 0.5vw;
+      align-items: center;
+      line-height: 1;
+      z-index: 1000;
+    }
+
+    @keyframes leftCloudCome {
+      0% {
+        transform: translateX(-120%);
+      }
+
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes rightCloudCome {
+      0% {
+        transform: translateX(120%);
+      }
+
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    .boat {
+      position: absolute;
+      top: -55%;
+      width: 22vw;
+      left: 5%;
+      transform: rotate(0deg);
+    }
+
+    .boat img {
+      width: 100%;
+      display: block;
+      object-fit: contain;
+    }
+
+    .cloud {
+      width: 42vw;
+      position: fixed;
+    }
+
+    .cloud img,
+    .small-cloud img {
+      width: 100%;
+      display: block;
+      object-fit: contain;
+    }
+
+    .left-cloud {
+      left: 0%;
+      bottom: 5%;
+      transform: translateX(-120%);
+      animation: leftCloudCome 1s ease forwards;
+    }
+
+    .right-cloud {
+      right: 0%;
+      bottom: 5%;
+      transform: translateX(120%);
+      animation: rightCloudCome 1s ease forwards;
+    }
+
+    @keyframes leftCloudCome {
+      0% {
+        transform: translateX(-120%);
+      }
+
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes rightCloudCome {
+      0% {
+        transform: translateX(120%);
+      }
+
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    .small-cloud {
+      width: 10vw;
+      position: absolute;
+      z-index: 99999;
+    }
+
+    .small-left {
+      left: 20%;
+      top: 23%;
+    }
+
+    .small-left img {
+      width: 78%;
+    }
+
+    .small-right {
+      left: 75%;
+      top: 10%;
+    }
+
+    button {
+      background-color: red;
+      position: absolute;
+      border: none;
+      background-color: transparent;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 15vw;
+      z-index: 99999;
+      animation: smoothPop 1.6s ease-in-out infinite;
+      transform-origin: center;
+      pointer-events: auto;
+      cursor: pointer;
+    }
+
+    button i {
+      font-size: 2.5vw;
+      color: white !important;
+      transform: scale(1);
+      pointer-events: auto;
+    }
+
+    button:hover i {
+      transform: scale(1.05);
+    }
+
+    @keyframes smoothPop {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.12);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .left-cloud,
+    .right-cloud,
+    .bottom-layer,
+    .page-title,
+    .page-title span,
+    .page-title button,
+    .title,
+    .topics {
+      transition: all 1.2s ease-in-out;
+    }
+
+    .page-open .left-cloud {
+      left: -23vw;
+      bottom: 5%!important;
+    }
+
+    .page-open .right-cloud {
+      right: -23vw;
+      bottom: 5%!important;
+    }
+
+    .page-open .bottom-layer {
+      bottom: -10vw;
+    }
+
+    .page-open .page-title {
+      bottom: 1vw!important;
+      width: 80vw;
+      height: 44vw;
+      border-radius: 12vw;
+    }
+
+    .page-open .page-title > span,
+    .page-open > button {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .home-btn {
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .page-open .home-btn {
+      opacity: 1;
+    }
+
+    .page-open .title {
+      display: flex;
+      animation: titleComeDown 1s ease forwards;
+    }
+
+    .page-open .topics {
+      display: flex;
+      opacity: 1;
+    }
+
+    @keyframes titleComeDown {
+      from {
+        transform: translate(-50%, -8vw);
+        opacity: 0;
+      }
+
+      to {
+        transform: translate(-50%, 0);
+        opacity: 1;
+      }
+    }
+  </style>
+
+  <body>
+    <a class="home-button home-btn" href="index.html">
+      <img src="./assets/images/home-btn.png" alt="" />
+    </a>
+    <button>
+      <i class="fa-solid fa-angles-down"></i>
+    </button>
+    <div class="title" data-lang-key="title-1"></div>
+    <div class="page-title">
+      <span data-lang-key="title"></span>
+
+      <div class="topics">
+        <!-- row -1 -->
+        <div class="row row-1">
+          <div class="col col-1">
+            <img src="./assets/images/topic-box.png" alt="" />
+            <span class="num" data-lang-key="num.1"></span>
+            <span class="text" data-lang-key="topic-1"></span>
+          </div>
+          <div class="col col-2">
+            <img src="./assets/images/topic-box.png" alt="" />
+            <span class="num" data-lang-key="num.2"></span>
+            <span class="text" data-lang-key="topic-2"></span>
+          </div>
+        </div>
+        <!-- row-2 -->
+        <div class="row row-2">
+          <div class="col col-1">
+            <img src="./assets/images/topic-box.png" alt="" />
+            <span class="text" data-lang-key="topic-3"></span>
+            <span class="num" data-lang-key="num.3"></span>
+          </div>
+          <div class="col col-2">
+            <img src="./assets/images/topic-box.png" alt="" />
+            <span class="text" data-lang-key="topic-4"></span>
+            <span class="num" data-lang-key="num.4"></span>
+          </div>
+          <div class="col col-3">
+            <img src="./assets/images/topic-box.png" alt="" />
+            <span class="text" data-lang-key="topic-5"></span>
+            <span class="num" data-lang-key="num.5"></span>
+          </div>
+          <div class="col col-4">
+            <img src="./assets/images/topic-box.png" alt="" />
+            <span class="text" data-lang-key="topic-6"></span>
+            <span class="num" data-lang-key="num.6"></span>
+          </div>
+          <div class="col col-5">
+            <img src="./assets/images/topic-box.png" alt="" />
+            <span class="text" data-lang-key="topic-7"></span>
+            <span class="num" data-lang-key="num.7"></span>
+          </div>
+        </div>
+        <!-- row-3 -->
+        <div class="row row-3">
+          <div class="col col-1">
+            <img src="./assets/images/topic-box.png" alt="" />
+            <span class="text" data-lang-key="topic-8"></span>
+            <span class="num" data-lang-key="num.9"></span>
+          </div>
+          <div class="col col-2">
+            <img src="./assets/images/topic-box.png" alt="" />
+            <span class="text" data-lang-key="topic-9"></span>
+            <span class="num" data-lang-key="num.9"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- nav-container -->
+    <div class="language-container">
+      <div class="english active">E</div>
+      <div class="hindi">H</div>
+      <div class="gujrati">G</div>
+    </div>
+
+    <div class="cloud left-cloud">
+      <img src="./assets/images/left-cloud.png" alt="" />
+    </div>
+    <div class="cloud right-cloud">
+      <img src="./assets/images/right-cloud.png" alt="" />
+    </div>
+
+    <div class="small-cloud small-left">
+      <img src="./assets/images/left-small-cloud.png" alt="" />
+    </div>
+    <div class="small-cloud small-right">
+      <img src="./assets/images/right-small-cloud.png" alt="" />
+    </div>
+    <div class="bottom-layer">
+      <div class="waves wave-1">
+        <img src="./assets/images/wave1.png" alt="" />
+      </div>
+      <div class="boat">
+        <img src="./assets/images/boat.png" alt="" />
+      </div>
+      <div class="waves wave-2">
+        <img src="./assets/images/wave2.png" alt="" />
+      </div>
+    </div>
+
+    <script src="./assets/js/app.js"></script>
+    <script>
+      const topicCols = document.querySelectorAll(".topics .col");
+
+      topicCols.forEach((col, index) => {
+        col.addEventListener("click", () => {
+          window.location.href = `tatva.html?slide=${index}`;
+        });
+      });
+      const openBtn = document.querySelector("body > button");
+
+      openBtn.addEventListener("click", () => {
+        document.body.classList.add("page-open");
+
+        setTimeout(() => {
+          openBtn.style.display = "none";
+          document.querySelector(".page-title > span").style.display = "none";
+        }, 1200);
+      });
+    </script>
+  </body>
+</doctype>
