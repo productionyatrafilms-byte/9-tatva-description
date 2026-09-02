@@ -4,10 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title data-lang-key="title-1"></title>
     <link rel="stylesheet" href="./assets/css/style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
+    <link rel="stylesheet" href="./fontawesome/css/all.min.css" />
   </head>
 
   <style>
@@ -313,6 +310,7 @@
     .page-open .topics {
       display: flex;
       opacity: 1;
+      pointer-events: auto;
     }
 
     @keyframes titleComeDown {
@@ -427,19 +425,51 @@
         <img src="./assets/images/wave2.png" alt="" />
       </div>
     </div>
+    <script src="./assets/js/djp.js"></script>
 
+    <script src="./assets/js/data.js"></script>
     <script src="./assets/js/app.js"></script>
     <script>
       const topicCols = document.querySelectorAll(".topics .col");
 
       topicCols.forEach((col, index) => {
         col.addEventListener("click", () => {
-          window.location.href = `tatva.html?slide=${index}`;
+          const destination = `tatva.html?slide=${index}`;
+
+          if (typeof topicClickSound === "undefined") {
+            window.location.href = destination;
+            return;
+          }
+
+          let navigated = false;
+          const go = () => {
+            if (navigated) return;
+            navigated = true;
+            window.location.href = destination;
+          };
+
+          topicClickSound.currentTime = 0;
+          topicClickSound.addEventListener("ended", go, { once: true });
+
+          const playPromise = topicClickSound.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(go);
+          }
+
+          setTimeout(go, 2200);
         });
       });
       const openBtn = document.querySelector("body > button");
+      const downArrowSound = new Audio("./assets/audio/transition/5.mp3");
+      downArrowSound.preload = "auto";
 
       openBtn.addEventListener("click", () => {
+        // stop this firing more than once while the open animation runs
+        openBtn.style.pointerEvents = "none";
+
+        downArrowSound.currentTime = 0;
+        downArrowSound.play().catch(() => {});
+
         document.body.classList.add("page-open");
 
         setTimeout(() => {

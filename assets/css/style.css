@@ -1,3 +1,9 @@
+/* djp.js injects a close-button link in the top-right corner on every
+   page it runs on; not wanted here */
+.back-button {
+  display: none !important;
+}
+
 @font-face {
   font-family: "BalooRegular";
   src: url("../../fonts/Baloo Regular 400.ttf") format("truetype");
@@ -34,6 +40,22 @@
   font-family: "NotoSansGujaratiRegular";
   src: url("../../fonts/NotoSansGujarati-Regular.ttf") format("truetype");
   font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ITFDevanagari";
+  src: url("../../fonts/ITFDevanagari-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ITFDevanagari";
+  src: url("../../fonts/ITFDevanagari-Bold-02.otf") format("opentype");
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
@@ -142,6 +164,7 @@ body {
   position: absolute;
   top: 1vw;
   opacity: 0;
+  pointer-events: none;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -234,12 +257,12 @@ body {
 .pranam-img span {
   z-index: 15;
   position: absolute;
-  top: 17%;
+  top: 0%;
   left: 50%;
   font-size: 3.4vw;
   transform: translateX(-50%);
   font-family: "BalooRegular";
-  color: #6D9DFF;
+  color: #FFFFFF;
 }
 
 .pranam-container .home-btn-1 {
@@ -305,4 +328,120 @@ body {
 .back-btn:hover i {
   font-size: 1.2vw;
   color: #FF803A !important;
+}
+
+/* a self-contained circular video card: fixed size, its own backdrop, and
+   feathered edges so it blends into the pranam frame instead of being
+   hard-cropped against it */
+.pranam-video {
+  position: absolute;
+  left: 50%;
+  top: 49%;
+  transform: translate(-50%, -50%);
+  width: 28vw;
+  height: 28vw;
+  border-radius: 50%;
+  background-color: #f6f6f6;
+  background-image: url("../images/pranam-bg-1.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding-right: 2.5vw;
+}
+
+.pranam-video video {
+  width: 90%;
+  height: 83%;
+  object-fit: cover;
+
+  -webkit-mask-image:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(0, 0, 0, 0.8) 2%,
+      rgba(0, 0, 0, 0.95) 4%,
+      black 6%,
+      black 90%,
+      rgba(0, 0, 0, 0.95) 96%,
+      rgba(0, 0, 0, 0.8) 98%,
+      transparent 100%
+    ),
+    linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(0, 0, 0, 0.8) 2%,
+      rgba(0, 0, 0, 0.95) 4%,
+      black 6%,
+      black 90%,
+      rgba(0, 0, 0, 0.95) 96%,
+      rgba(0, 0, 0, 0.8) 98%,
+      transparent 100%
+    );
+  -webkit-mask-composite: source-in;
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(0, 0, 0, 0.8) 2%,
+      rgba(0, 0, 0, 0.95) 4%,
+      black 6%,
+      black 90%,
+      rgba(0, 0, 0, 0.95) 96%,
+      rgba(0, 0, 0, 0.8) 98%,
+      transparent 100%
+    ),
+    linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(0, 0, 0, 0.8) 2%,
+      rgba(0, 0, 0, 0.95) 4%,
+      black 6%,
+      black 90%,
+      rgba(0, 0, 0, 0.95) 96%,
+      rgba(0, 0, 0, 0.8) 98%,
+      transparent 100%
+    );
+  mask-composite: intersect;
+
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+/* ===== Hindi ===== */
+body[data-lang="hi"] {
+  font-family: "ITFDevanagari";
+}
+
+body[data-lang="hi"] .page-title span,
+body[data-lang="hi"] .title,
+body[data-lang="hi"] .title .num,
+body[data-lang="hi"] .title .text,
+body[data-lang="hi"] .col .num,
+body[data-lang="hi"] .col .text,
+body[data-lang="hi"] .content-container,
+body[data-lang="hi"] .pranam-img span,
+body[data-lang="hi"] .home-btn-1 span {
+  font-family: "ITFDevanagari" !important;
+  font-weight: 700 !important;
+}
+
+/* ===== Gujarati ===== */
+body[data-lang="gu"] .page-title span,
+body[data-lang="gu"] .title,
+body[data-lang="gu"] .title .num,
+body[data-lang="gu"] .title .text,
+body[data-lang="gu"] .col .num,
+body[data-lang="gu"] .col .text,
+body[data-lang="gu"] .content-container,
+body[data-lang="gu"] .pranam-img span,
+body[data-lang="gu"] .home-btn-1 span {
+  font-family: "NotoSansGujaratiBold" !important;
+  font-weight: 700 !important;
 }

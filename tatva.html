@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title data-lang-key="title-1"></title>
   <link rel="stylesheet" href="./assets/css/style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="./fontawesome/css/all.min.css" />
+  <link rel="stylesheet" href="./assets/css/swiper-bundle.min.css" />
 </head>
 
 <style>
@@ -254,6 +254,65 @@
     object-fit: contain;
     display: block;
   }
+
+  /* Pranam link - hidden by default, shown only on the last slide */
+  .pranam-link {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 5vw;
+    bottom: 2vw;
+    width: 9vw;
+    height: auto;
+    text-decoration: none;
+    z-index: 100000;
+    cursor: pointer;
+    transform-origin: center;
+    animation: pranamPop 1.2s ease-in-out infinite;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+
+  .pranam-link.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .pranam-link img {
+    position: relative;
+    width: 100%;
+    display: block;
+    object-fit: contain;
+  }
+
+  .pranam-link span {
+    position: absolute;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.3vw;
+    padding-right: 1vw;
+    font-family: "BalooRegular";
+  }
+
+  @keyframes pranamPop {
+    0% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(1.12);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
 </style>
 
 <body>
@@ -318,6 +377,11 @@
     <img src="./assets/images/next-btn.png" alt="" />
   </div>
 
+  <a href="pranam.html" class="pranam-link">
+    <img src="./assets/images/arowAsset.png" alt="" />
+    <span data-lang-key="pranam"></span>
+  </a>
+
   <div class="language-container">
     <div class="english active">E</div>
     <div class="hindi">H</div>
@@ -353,13 +417,16 @@
       <img src="./assets/images/wave2.png" alt="" />
     </div>
   </div>
+    <script src="./assets/js/djp.js"></script>
 
+  <script src="./assets/js/data.js"></script>
   <script src="./assets/js/app.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="./assets/js/swiper-bundle.min.js"></script>
 
   <script>
     const prevBtn = document.querySelector(".prev-btn");
     const nextBtn = document.querySelector(".next-btn");
+    const pranamLink = document.querySelector(".pranam-link");
     const boat = document.querySelector(".boat");
     const activeContent = document.querySelector(".active-content");
 
@@ -398,7 +465,14 @@
         prevBtn.style.display = "block";
       }
 
-      nextBtn.style.display = "block";
+      const isLast = swiperInstance.activeIndex === swiperInstance.slides.length - 1;
+
+      nextBtn.style.opacity = isLast ? "0" : "1";
+      nextBtn.style.pointerEvents = isLast ? "none" : "auto";
+
+      if (pranamLink) {
+        pranamLink.classList.toggle("show", isLast);
+      }
     }
 
     function updateActiveContent(swiperInstance) {
@@ -447,11 +521,7 @@
     });
 
     nextBtn.addEventListener("click", () => {
-      if (swiper.activeIndex === swiper.slides.length - 1) {
-        window.location.href = "pranam.html";
-      } else {
-        swiper.slideNext();
-      }
+      swiper.slideNext();
     });
   </script>
 </body>
