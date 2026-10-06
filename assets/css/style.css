@@ -1,9 +1,3 @@
-/* djp.js injects a close-button link in the top-right corner on every
-   page it runs on; not wanted here */
-.back-button {
-  display: none !important;
-}
-
 @font-face {
   font-family: "BalooRegular";
   src: url("../../fonts/Baloo Regular 400.ttf") format("truetype");
@@ -86,7 +80,7 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
-  overflow-x: hidden;
+  overflow: hidden;
   opacity: 1;
   transition: opacity 0.5s ease;
 }
