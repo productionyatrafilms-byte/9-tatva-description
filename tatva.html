@@ -330,39 +330,39 @@
     <div class="swiper mySwiper">
       <div class="swiper-wrapper">
         <div class="swiper-slide">
-          <video src="./assets/videos/1.mp4" autoplay muted loop playsinline></video>
+          <video src="./assets/videos/1.mp4" preload="auto" autoplay muted loop playsinline></video>
         </div>
 
         <div class="swiper-slide">
-          <video src="./assets/videos/2.mp4" muted loop playsinline></video>
+          <video src="./assets/videos/2.mp4" preload="none" muted loop playsinline></video>
         </div>
 
         <div class="swiper-slide">
-          <video src="./assets/videos/3.mp4" muted loop playsinline></video>
+          <video src="./assets/videos/3.mp4" preload="none" muted loop playsinline></video>
         </div>
 
         <div class="swiper-slide">
-          <video src="./assets/videos/4.mp4" muted loop playsinline></video>
+          <video src="./assets/videos/4.mp4" preload="none" muted loop playsinline></video>
         </div>
 
         <div class="swiper-slide">
-          <video src="./assets/videos/5.mp4" muted loop playsinline></video>
+          <video src="./assets/videos/5.mp4" preload="none" muted loop playsinline></video>
         </div>
 
         <div class="swiper-slide">
-          <video src="./assets/videos/6.mp4" muted loop playsinline></video>
+          <video src="./assets/videos/6.mp4" preload="none" muted loop playsinline></video>
         </div>
 
         <div class="swiper-slide">
-          <video src="./assets/videos/7.mp4" muted loop playsinline></video>
+          <video src="./assets/videos/7.mp4" preload="none" muted loop playsinline></video>
         </div>
 
         <div class="swiper-slide">
-          <video src="./assets/videos/8.mp4" muted loop playsinline></video>
+          <video src="./assets/videos/8.mp4" preload="none" muted loop playsinline></video>
         </div>
 
         <div class="swiper-slide">
-          <video src="./assets/videos/9.mp4" muted loop playsinline></video>
+          <video src="./assets/videos/9.mp4" preload="none" muted loop playsinline></video>
         </div>
       </div>
     </div>
@@ -418,7 +418,6 @@
       <img src="./assets/images/wave2.png" alt="" />
     </div>
   </div>
-    <script src="./assets/js/djp.js"></script>
 
   <script src="./assets/js/data.js"></script>
   <script src="./assets/js/app.js"></script>
@@ -498,6 +497,8 @@
       allVideos.forEach((video) => {
         video.pause();
         video.currentTime = 0;
+        // inactive slides must not download until their slide is reached
+        video.preload = "none";
       });
 
       const activeVideo =
@@ -506,7 +507,8 @@
         );
 
       if (activeVideo) {
-        activeVideo.play();
+        activeVideo.preload = "auto";
+        activeVideo.play().catch(() => {});
       }
     }
 
